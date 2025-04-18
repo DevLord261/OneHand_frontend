@@ -1,0 +1,122 @@
+.mainhome {
+    width: 100%;
+    height: 100%;
+}
+
+.herosection {
+    position: relative;
+    width: 100%;
+    height: 93%;
+    overflow: hidden;
+}
+
+.herosection img {
+    position: absolute;
+    object-fit: cover;
+    object-position: center;
+    top: -25%;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    margin: 0px;
+}
+
+.textbox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+    gap: 14px;
+}
+.textbox button {
+    background-color: #ff8000;
+    color: black;
+    border: none;
+    border-radius: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 50%;
+    align-self: center;
+    font-weight: bold;
+}
+.maintext {
+    font-weight: bolder;
+    font-size: 22px;
+    color: black;
+    text-align: center;
+    align-self: center;
+}
+
+.alttext {
+    width: 350px;
+    text-align: center;
+    align-self: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #001f3f;
+}
+
+.categoriesSection {
+    position: relative;
+    background-color: #66b2ff;
+    width: 100%;
+    height: 580px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 80px;
+}
+
+.categoriesSection #maintext {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0px 0px 0px 200px;
+    /* padding-top: 50px; */
+    width: 30%;
+}
+
+.categoriesSection #title {
+    color: #008080;
+}
+
+.categoriesSection #title:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #d9d9d9; /* or any color you like */
+    margin-right: 8px;
+    border-radius: 2px; /* optional: make it slightly rounded */
+    vertical-align: middle;
+}
+
+.categoriesSection #header1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+.categoriesSection #body {
+    margin-top: 100px;
+    font-size: 18px;
+}
+
+.categories {
+    width: 50%;
+    height: 80%;
+    margin-right: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.row1,
+.row2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 200px;
+}
