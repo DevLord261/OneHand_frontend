@@ -2,9 +2,21 @@ import ToolBar from "../componenets/ToolBar";
 import Hero from "../assets/Hero.jpg";
 import "../styles/Home.css";
 import CategoryCard from "../componenets/Card";
-import Medical from "../assets/medical.svg";
+import categoryimage from "../model/categoryimage";
 
 function Home() {
+  const categories = [
+    { title: "Medical", key: "medical" },
+    { title: "business", key: "business" },
+    { title: "Design", key: "design" },
+    { title: "Restoring", key: "restore" },
+    { title: "School", key: "school" },
+    { title: "Technology", key: "technology" },
+  ];
+
+  const half = Math.ceil(categories.length / 2);
+  const firsthalf = categories.slice(0, half);
+  const secondhalf = categories.slice(half);
   return (
     <>
       <div className="mainhome">
@@ -34,14 +46,22 @@ function Home() {
           </div>
           <div className="categories">
             <div className="row1">
-              <CategoryCard title="Meidcal" logo={Medical} />
-              <CategoryCard title="Meidcal" logo={Medical} />
-              <CategoryCard title="Meidcal" logo={Medical} />
+              {firsthalf.map((cat) => (
+                <CategoryCard
+                  key={cat.key}
+                  title={cat.title}
+                  logo={categoryimage[cat.key]}
+                />
+              ))}
             </div>
             <div className="row2">
-              <CategoryCard title="Meidcal" logo={Medical} />
-              <CategoryCard title="Meidcal" logo={Medical} />
-              <CategoryCard title="Meidcal" logo={Medical} />
+              {secondhalf.map((cat) => (
+                <CategoryCard
+                  key={cat.key}
+                  title={cat.title}
+                  logo={categoryimage[cat.key]}
+                />
+              ))}
             </div>
           </div>
         </div>
