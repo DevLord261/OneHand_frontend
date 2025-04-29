@@ -1,8 +1,6 @@
-import ToolBar from "../componenets/ToolBar";
 import Hero from "../assets/Hero.jpg";
-import "../styles/Home.css";
 import CategoryCard from "../componenets/Card";
-import categoryimage from "../model/categoryimage";
+import styles from "../styles/Home.module.css";
 
 function Home() {
   const categories = [
@@ -19,50 +17,41 @@ function Home() {
   const secondhalf = categories.slice(half);
   return (
     <>
-      <div className="mainhome">
+      <div className={styles.mainhome}>
         {/* <ToolBar /> */}
-        <div className="herosection">
-          <div className="textbox">
-            <label className="maintext">
+        <div className={styles.herosection}>
+          <div className={styles.textbox}>
+            <label className={styles.maintext}>
               A Helping Hand for a Better Tomorrow
             </label>
-            <label className="alttext">
+            <label className={styles.alttext}>
               Launch a fundraiser to support the causes you care about.
             </label>
             <button>Start a Campaign</button>
           </div>
           <img src={Hero} alt="Hero logo"></img>
         </div>
-        <div className="categoriesSection">
-          <div id="maintext">
-            <label id="title">Which category interest you</label>
-            <label id="header1">Top Categories</label>
-            <label id="body">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the when an unknown was popularise
-            </label>
-          </div>
-          <div className="categories">
-            <div className="row1">
-              {firsthalf.map((cat) => (
-                <CategoryCard
-                  key={cat.key}
-                  title={cat.title}
-                  logo={categoryimage[cat.key]}
-                />
-              ))}
-            </div>
-            <div className="row2">
-              {secondhalf.map((cat) => (
-                <CategoryCard
-                  key={cat.key}
-                  title={cat.title}
-                  logo={categoryimage[cat.key]}
-                />
-              ))}
+        <div className={styles.categoriesSection}>
+          <div className={styles.categtext}>
+            <label className={styles.categtitle}>Top Categories</label>
+            <div>
+              <p className={styles.p}>
+                Explore fundraiser in some of the platform's most popular
+                categories.
+              </p>
+              <p className={styles.p}>
+                {" "}
+                There is more cause you can support - just check them all.
+              </p>
             </div>
           </div>
+          <a style={{ cursor: "pointer" }}>see all categories</a>
+        </div>
+        <div className={styles.categorycontainer}>
+          <CategoryCard />
+          <CategoryCard />
+          <CategoryCard />
+          <CategoryCard />
         </div>
       </div>
     </>
