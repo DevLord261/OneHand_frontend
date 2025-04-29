@@ -1,10 +1,25 @@
 import { useState } from "react";
 import styles from "../styles/Login.module.css";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
+
+interface User {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
+  role: "GUEST";
+  emailVerified: false;
+  phoneVerified: false;
+  phoneNumber: string;
+}
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [isActive, setIsActive] = useState(false);
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<User>({
     firstName: "",
     lastName: "",
     username: "",
@@ -13,14 +28,15 @@ export default function Login() {
     role: "GUEST",
     emailVerified: false,
     phoneVerified: false,
-    phoneNumber: "123123123",
+    phoneNumber: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({
-      ...user,
+    setUser((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   // Handle form submission
@@ -39,6 +55,8 @@ export default function Login() {
       if (response.ok) {
         const data = await response.json();
         console.log("User created successfully:", data);
+
+        navigate("/");
       } else {
         console.error("Error creating user:", response.statusText);
       }

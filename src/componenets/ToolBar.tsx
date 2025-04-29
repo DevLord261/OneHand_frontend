@@ -22,7 +22,9 @@ export default function ToolBar() {
         </div>
         <div className="right-toolbar">
           <label> About </label>
-          <button>Sign In</button>
+          <a type="button" href="login">
+            Sign In
+          </a>
         </div>
       </div>
     </>
