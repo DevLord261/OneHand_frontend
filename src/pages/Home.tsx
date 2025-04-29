@@ -20,17 +20,16 @@ function Home() {
   return (
     <>
       <div className="mainhome">
-        <ToolBar />
+        {/* <ToolBar /> */}
         <div className="herosection">
           <div className="textbox">
             <label className="maintext">
-              "A Helping Hand for a Better Tomorrow"
+              A Helping Hand for a Better Tomorrow
             </label>
             <label className="alttext">
-              Fund projects, donate tools, or volunteer your skills. Let’s build
-              a brighter future, together.
+              Launch a fundraiser to support the causes you care about.
             </label>
-            <button>Start Campaign</button>
+            <button>Start a Campaign</button>
           </div>
           <img src={Hero} alt="Hero logo"></img>
         </div>

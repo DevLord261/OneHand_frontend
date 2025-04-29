@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 .mainhome {
     width: 100%;
     height: 100%;
@@ -5,6 +7,7 @@
 
 .herosection {
     position: relative;
+    display: flex;
     width: 100%;
     height: 93%;
     overflow: hidden;
@@ -19,6 +22,7 @@
     height: auto;
     z-index: 1;
     margin: 0px;
+    filter: brightness(0.4); /* 1 is normal, <1 is darker */
 }
 
 .textbox {
@@ -27,36 +31,38 @@
     flex-direction: column;
     z-index: 5;
     left: 50%;
-    top: 65%;
+    top: 50%;
     transform: translate(-50%, -50%);
     gap: 14px;
 }
 .textbox button {
-    background-color: #ff8000;
-    color: black;
-    border: none;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(200deg, #a020f0, #ff8000);
+    color: white;
     border-radius: 18px;
-    padding: 10px 20px;
     cursor: pointer;
-    width: 50%;
+    font-size: 24px;
     align-self: center;
-    font-weight: bold;
+    transition: opacity 0.3s ease;
 }
 .maintext {
-    font-weight: bolder;
-    font-size: 22px;
-    color: black;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 72px;
     text-align: center;
     align-self: center;
+    color: white;
 }
 
 .alttext {
-    width: 350px;
+    /* width: 350px; */
+    font-family: "Inter", sans-serif;
     text-align: center;
     align-self: center;
-    font-weight: 600;
-    font-size: 14px;
-    color: #001f3f;
+    font-weight: normal;
+    font-size: 24px;
+    color: white;
 }
 
 .categoriesSection {
