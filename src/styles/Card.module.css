@@ -12,3 +12,12 @@
     font-size: 24px;
     /* margin-left: 5%; */
 }
+
+.roundedimg {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background: lightgray;
+    padding: 10px;
+    border-radius: 50%;
+}

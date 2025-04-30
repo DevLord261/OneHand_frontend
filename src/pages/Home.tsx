@@ -1,20 +1,12 @@
 import Hero from "../assets/Hero.jpg";
 import CategoryCard from "../componenets/Card";
 import styles from "../styles/Home.module.css";
+import Medical from "../assets/category/medic.png";
+import Technology from "../assets/category/technology.svg";
+import Restoring from "../assets/category/restore.svg";
+import Business from "../assets/category/business.svg";
 
 function Home() {
-  const categories = [
-    { title: "Medical", key: "medical" },
-    { title: "business", key: "business" },
-    { title: "Design", key: "design" },
-    { title: "Restoring", key: "restore" },
-    { title: "School", key: "school" },
-    { title: "Technology", key: "technology" },
-  ];
-
-  const half = Math.ceil(categories.length / 2);
-  const firsthalf = categories.slice(0, half);
-  const secondhalf = categories.slice(half);
   return (
     <>
       <div className={styles.mainhome}>
@@ -33,7 +25,7 @@ function Home() {
         </div>
         <div className={styles.categoriesSection}>
           <div className={styles.categtext}>
-            <label className={styles.categtitle}>Top Categories</label>
+            <label className={styles.categtitle}>Top Categories</label>-{" "}
             <div>
               <p className={styles.p}>
                 Explore fundraiser in some of the platform's most popular
@@ -45,13 +37,15 @@ function Home() {
               </p>
             </div>
           </div>
-          <a style={{ cursor: "pointer" }}>see all categories</a>
+          <a style={{ cursor: "pointer", fontSize: "18px" }}>
+            See all categories
+          </a>
         </div>
         <div className={styles.categorycontainer}>
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
-          <CategoryCard />
+          <CategoryCard logo={Medical} name="Medical" />
+          <CategoryCard logo={Business} name="Business" />
+          <CategoryCard logo={Technology} name="Technology" />
+          <CategoryCard logo={Restoring} name="Rebuilding" />
         </div>
       </div>
     </>
