@@ -2,9 +2,9 @@ import Hero from "../assets/Hero.jpg";
 import CategoryCard from "../componenets/Card";
 import styles from "../styles/Home.module.css";
 import Medical from "../assets/category/medic.png";
-import Technology from "../assets/category/technology.svg";
-import Restoring from "../assets/category/restore.svg";
-import Business from "../assets/category/business.svg";
+import Technology from "../assets/category/innovation.png";
+import Restoring from "../assets/category/restore.png";
+import Business from "../assets/category/investment.png";
 
 function Home() {
   return (
@@ -25,7 +25,7 @@ function Home() {
         </div>
         <div className={styles.categoriesSection}>
           <div className={styles.categtext}>
-            <label className={styles.categtitle}>Top Categories</label>-{" "}
+            <label className={styles.categtitle}>Top Categories</label>
             <div>
               <p className={styles.p}>
                 Explore fundraiser in some of the platform's most popular
@@ -45,8 +45,9 @@ function Home() {
           <CategoryCard logo={Medical} name="Medical" />
           <CategoryCard logo={Business} name="Business" />
           <CategoryCard logo={Technology} name="Technology" />
-          <CategoryCard logo={Restoring} name="Rebuilding" />
+          <CategoryCard logo={Restoring} name="Rebuild & Recover" />
         </div>
+        asdsss
       </div>
     </>
   );

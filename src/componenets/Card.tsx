@@ -11,7 +11,7 @@ export default function CategoryCard({
     <>
       <div className={styles.containers}>
         <div className={styles.roundedimg}>
-          <img src={logo} alt="image" width={"50px"} />
+          <img src={logo} alt="image" width={"60px"} />
         </div>
         <p>{name}</p>
       </div>
