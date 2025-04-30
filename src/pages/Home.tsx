@@ -5,6 +5,7 @@ import Medical from "../assets/category/medic.png";
 import Technology from "../assets/category/innovation.png";
 import Restoring from "../assets/category/restore.png";
 import Business from "../assets/category/investment.png";
+import CampaignCard from "../componenets/CampaignCard";
 
 function Home() {
   return (
@@ -47,7 +48,11 @@ function Home() {
           <CategoryCard logo={Technology} name="Technology" />
           <CategoryCard logo={Restoring} name="Rebuild & Recover" />
         </div>
-        asdsss
+        <div className={styles.Categcontainer}>
+          <CampaignCard />
+          <CampaignCard />
+          <CampaignCard />
+        </div>
       </div>
     </>
   );

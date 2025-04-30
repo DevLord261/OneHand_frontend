@@ -1,0 +1,7 @@
+.container {
+    display: flex;
+    position: relative;
+    background-color: lightgray;
+    width: 450px;
+    height: 500px;
+}
