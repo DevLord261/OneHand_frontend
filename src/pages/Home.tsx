@@ -38,7 +38,13 @@ function Home() {
               </p>
             </div>
           </div>
-          <a style={{ cursor: "pointer", fontSize: "18px" }}>
+          <a
+            style={{
+              cursor: "pointer",
+              fontSize: "18px",
+              height: "fit-content",
+            }}
+          >
             See all categories
           </a>
         </div>
