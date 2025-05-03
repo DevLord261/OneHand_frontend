@@ -1,6 +1,6 @@
 # OneHand Project
 
-    The OneHand project is a crowdfunding platform with focus on volunteerism and community engagement. It aims to connect individuals and organizations in need of support with those willing to contribute their time, skills, and resources. The frontend of the platform is built using React.js and combination with vite technology.
+The OneHand project is a crowdfunding platform with focus on volunteerism and community engagement. It aims to connect individuals and organizations in need of support with those willing to contribute their time, skills, and resources. The frontend of the platform isbuilt using React.js and combination with vite technology.
 
 ## Installation
 
