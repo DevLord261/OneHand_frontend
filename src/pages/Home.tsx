@@ -16,7 +16,10 @@ function NewHome() {
       </nav>
       <main className={styles.container}>
         <div className={styles.herosection}>
-          <img className={styles.herologo} src={Hero} alt="Hero logo"></img>
+          <picture>
+            <source srcSet="image.webp" type="image/webp" />
+            <img className={styles.herologo} src={Hero} alt="Hero logo"></img>
+          </picture>
           <div className={styles.textbox}>
             <label className={styles.maintext}>
               A Helping Hand for a Better Tomorrow
