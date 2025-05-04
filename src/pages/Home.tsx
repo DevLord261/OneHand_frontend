@@ -17,7 +17,7 @@ function NewHome() {
       <main className={styles.container}>
         <div className={styles.herosection}>
           <picture>
-            <source srcSet="image.webp" type="image/webp" />
+            <source srcSet="Hero.webp" type="image/webp" />
             <img className={styles.herologo} src={Hero} alt="Hero logo"></img>
           </picture>
           <div className={styles.textbox}>
