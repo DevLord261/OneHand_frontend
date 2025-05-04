@@ -1,18 +1,22 @@
+import ToolBar from "../componenets/ToolBar";
+import styles from "../styles/Home.module.css";
 import Hero from "../assets/Hero.jpg";
 import CategoryCard from "../componenets/Card";
-import styles from "../styles/Home.module.css";
 import Medical from "../assets/category/medic.png";
 import Technology from "../assets/category/innovation.png";
 import Restoring from "../assets/category/restore.png";
 import Business from "../assets/category/investment.png";
 import CampaignCard from "../componenets/CampaignCard";
 
-function Home() {
+function NewHome() {
   return (
-    <>
-      <div className={styles.mainhome}>
-        {/* <ToolBar /> */}
+    <div className={styles.container}>
+      <nav>
+        <ToolBar />
+      </nav>
+      <main className={styles.container}>
         <div className={styles.herosection}>
+          <img className={styles.herologo} src={Hero} alt="Hero logo"></img>
           <div className={styles.textbox}>
             <label className={styles.maintext}>
               A Helping Hand for a Better Tomorrow
@@ -22,20 +26,17 @@ function Home() {
             </label>
             <button>Start a Campaign</button>
           </div>
-          <img src={Hero} alt="Hero logo"></img>
         </div>
+        {/* caregory section */}
         <div className={styles.categoriesSection}>
           <div className={styles.categtext}>
             <label className={styles.categtitle}>Top Categories</label>
             <div>
-              <p className={styles.p}>
+              <p>
                 Explore fundraiser in some of the platform's most popular
                 categories.
               </p>
-              <p className={styles.p}>
-                {" "}
-                There is more cause you can support - just check them all.
-              </p>
+              <p> There is more cause you can support - just check them all.</p>
             </div>
           </div>
           <a
@@ -59,9 +60,10 @@ function Home() {
           <CampaignCard />
           <CampaignCard />
         </div>
-      </div>
-    </>
+      </main>
+      <footer>footer</footer>
+    </div>
   );
 }
 
-export default Home;
+export default NewHome;
