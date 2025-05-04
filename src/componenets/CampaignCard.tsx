@@ -6,7 +6,12 @@ import ProgressBar from "./PrograssBar";
 export default function CampaignCard() {
   return (
     <div className={styles.container}>
-      <img className={styles.image} src={Solar} alt="solar energy" />
+      <img
+        className={styles.image}
+        src={Solar}
+        alt="solar energy"
+        loading="lazy"
+      />
       <div>
         <img src={Verified} alt="verfied badge"></img>
         <p>Verified</p>

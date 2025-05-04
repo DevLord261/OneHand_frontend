@@ -11,14 +11,17 @@ import CampaignCard from "../componenets/CampaignCard";
 function NewHome() {
   return (
     <div className={styles.container}>
-      <nav>
-        <ToolBar />
-      </nav>
+      <nav>{/* <ToolBar /> */}</nav>
       <main className={styles.container}>
         <div className={styles.herosection}>
           <picture>
             <source srcSet="Hero.webp" type="image/webp" />
-            <img className={styles.herologo} src={Hero} alt="Hero logo"></img>
+            <img
+              className={styles.herologo}
+              src={Hero}
+              alt="Hero logo"
+              loading="lazy"
+            ></img>
           </picture>
           <div className={styles.textbox}>
             <label className={styles.maintext}>
