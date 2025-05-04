@@ -1,4 +1,4 @@
-import ToolBar from "../componenets/ToolBar";
+// import ToolBar from "../componenets/ToolBar";
 import styles from "../styles/Home.module.css";
 import Hero from "../assets/Hero.jpg";
 import CategoryCard from "../componenets/Card";
@@ -20,7 +20,7 @@ function NewHome() {
               className={styles.herologo}
               src={Hero}
               alt="Hero logo"
-              loading="lazy"
+              rel="preload"
             ></img>
           </picture>
           <div className={styles.textbox}>
