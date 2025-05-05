@@ -13,6 +13,7 @@ function NewHome() {
     <div className={styles.container}>
       <nav>{/* <ToolBar /> */}</nav>
       <main className={styles.container}>
+        {/* Hero section */}
         <section className={styles.herosection}>
           <picture>
             <source srcSet="Hero.webp" type="image/webp" />
@@ -55,11 +56,14 @@ function NewHome() {
             See all categories
           </a>
         </section>
-        <section className={styles.categorycontainer}>
-          <CategoryCard logo={Medical} name="Medical" />
-          <CategoryCard logo={Business} name="Business" />
-          <CategoryCard logo={Technology} name="Technology" />
-          <CategoryCard logo={Restoring} name="Rebuild & Recover" />
+        {/* categoryContainer */}
+        <section className={styles.categoryScrollWrapper}>
+          <div className={styles.categorycontainer}>
+            <CategoryCard logo={Medical} name="Medical" />
+            <CategoryCard logo={Business} name="Business" />
+            <CategoryCard logo={Technology} name="Technology" />
+            <CategoryCard logo={Restoring} name="Rebuild & Recover" />
+          </div>
         </section>
         <section className={styles.Categcontainer}>
           <h1>Featured Campaigns</h1>
