@@ -13,7 +13,7 @@ function NewHome() {
     <div className={styles.container}>
       <nav>{/* <ToolBar /> */}</nav>
       <main className={styles.container}>
-        <div className={styles.herosection}>
+        <section className={styles.herosection}>
           <picture>
             <source srcSet="Hero.webp" type="image/webp" />
             <img
@@ -32,11 +32,11 @@ function NewHome() {
             </label>
             <button>Start a Campaign</button>
           </div>
-        </div>
+        </section>
         {/* caregory section */}
-        <div className={styles.categoriesSection}>
+        <section className={styles.categoriesSection}>
           <div className={styles.categtext}>
-            <label className={styles.categtitle}>Top Categories</label>
+            <h2 className={styles.categtitle}>Top Categories</h2>
             <div>
               <p>
                 Explore fundraiser in some of the platform's most popular
@@ -54,20 +54,37 @@ function NewHome() {
           >
             See all categories
           </a>
-        </div>
-        <div className={styles.categorycontainer}>
+        </section>
+        <section className={styles.categorycontainer}>
           <CategoryCard logo={Medical} name="Medical" />
           <CategoryCard logo={Business} name="Business" />
           <CategoryCard logo={Technology} name="Technology" />
           <CategoryCard logo={Restoring} name="Rebuild & Recover" />
-        </div>
-        <div className={styles.Categcontainer}>
+        </section>
+        <section className={styles.Categcontainer}>
+          <h1>Featured Campaigns</h1>
           <CampaignCard />
           <CampaignCard />
           <CampaignCard />
-        </div>
+        </section>
+        <section className={styles.trustworthy}>
+          <h3>Fundraising on OneHand is easy, powerful, and trusted.</h3>
+          <p>
+            Get what you need to help your fundraiser succeed on OneHand,
+            whether you’re raising money for yourself, friends, family, or
+            charity. OneHand is a trusted leader in online fundraising. With
+            simple pricing and a team of Trust & Safety experts in your corner,
+            you can raise money or make a donation with peace of mind. memorial
+            tributes and funerals to medical emergencies and nonprofits.
+            Whenever you need help, you can ask here.
+          </p>
+        </section>
       </main>
-      <footer>footer</footer>
+      <footer className={styles.footer}>
+        <p>© 2025 OneHand</p>
+        <a>Terms</a> <a>Privacy</a> <a>Notice</a> <a>Legal</a>{" "}
+        <a>Accessibility</a> <a>Statement</a> <a>Cookie</a> <a>Policy</a>
+      </footer>
     </div>
   );
 }
