@@ -1,7 +1,0 @@
-{
-  "routes": {
-    "/": "/index.html",
-    "/login": "/index.html",
-    "/*": "/404.html"
-  }
-}
