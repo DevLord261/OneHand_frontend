@@ -183,6 +183,7 @@ footer > a {
     color: black;
     font-weight: 400;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {
