@@ -12,23 +12,25 @@ export default function CampaignCard() {
         alt="solar energy"
         loading="lazy"
       />
-      <div>
-        <img src={Verified} alt="verfied badge"></img>
-        <p>Verified</p>
-      </div>
-      <h3 className={styles.title} style={{ paddingLeft: "20px" }}>
-        Solar Energy Campaign
-      </h3>
-      <div style={{ width: "100%", padding: "20px" }}>
-        <ProgressBar value={75} /> {/* 75% funded */}
-      </div>
-      <div className={styles.info}>
-        <p>$10,000 Raised</p>
-        <p>Goal: $20,000</p>
-      </div>
-      <div>
-        <p>Location: New York</p>
-      </div>
+      <section className={styles.sectioncontainer}>
+        <div>
+          <img src={Verified} alt="verfied badge"></img>
+          <p>Verified</p>
+        </div>
+        <h3 className={styles.title} style={{ paddingLeft: "20px" }}>
+          Solar Energy Campaign
+        </h3>
+        <div style={{ width: "100%", padding: "20px" }}>
+          <ProgressBar value={75} /> {/* 75% funded */}
+        </div>
+        <div className={styles.info}>
+          <p>$10,000 Raised</p>
+          <p>Goal: $20,000</p>
+        </div>
+        <div>
+          <p>Location: New York</p>
+        </div>
+      </section>
     </div>
   );
 }

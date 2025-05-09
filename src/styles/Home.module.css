@@ -228,4 +228,16 @@ footer > a {
         padding: 1rem;
         width: max-content;
     }
+    .Categcontainer {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto 1fr 1fr 1fr;
+        grid-template-areas: unset;
+        gap: 0.8rem;
+        padding: 0.8rem;
+        margin: 0 0;
+    }
+    .Categcontainer > h1 {
+        grid-area: unset;
+    }
 }
