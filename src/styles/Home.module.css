@@ -198,6 +198,7 @@ footer > a {
     }
     .herosection {
         height: 50vh;
+        max-height: 100vh;
     }
 
     .textbox {
@@ -214,7 +215,7 @@ footer > a {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         width: 100vw;
-        /* padding: 2rem 2rem; */
+        padding: 0rem 0.8rem;
         /* margin: 4rem auto; */
         scroll-snap-type: x mandatory;
     }
@@ -223,7 +224,7 @@ footer > a {
         display: flex;
         flex-direction: row;
 
-        gap: 1rem;
+        gap: 0.8rem;
         padding: 1rem;
         width: max-content;
     }
