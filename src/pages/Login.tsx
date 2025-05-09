@@ -66,10 +66,10 @@ export default function Login() {
   };
 
   return (
-    <main>
+    <main className={styles.background}>
       <div className={clsx(styles.container, { [styles.active]: isActive })}>
         {/* Login Form */}
-        <div className={clsx(styles["form-box"], styles.login)}>
+        <section className={clsx(styles["form-box"], styles.login)}>
           <form action="#">
             <h1>Login</h1>
             <div className={styles["input-box"]}>
@@ -100,26 +100,11 @@ export default function Login() {
             <button type="submit" className={styles.btn}>
               Login
             </button>
-            {/* <p>or login with social platforms</p>
-            <div className={styles["social-icons"]}>
-              <a href="#">
-                <i className="bx bxl-google"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-facebook"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-github"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-linkedin"></i>
-              </a>
-            </div> */}
           </form>
-        </div>
+        </section>
 
         {/* Registration Form */}
-        <div className={clsx(styles["form-box"], styles.register)}>
+        <section className={clsx(styles["form-box"], styles.register)}>
           <form onSubmit={handleSubmit}>
             <h1>Registration</h1>
             <div className={styles["input-box"]}>
@@ -196,10 +181,10 @@ export default function Login() {
               </a>
             </div> */}
           </form>
-        </div>
+        </section>
 
         {/* Toggle Panels */}
-        <div className={styles["toggle-box"]}>
+        <section className={styles["toggle-box"]}>
           <div className={clsx(styles["toggle-panel"], styles["toggle-left"])}>
             <h1>Hello, Welcome!</h1>
             <p>Don't have an account?</p>
@@ -221,7 +206,7 @@ export default function Login() {
               Login
             </button>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );
