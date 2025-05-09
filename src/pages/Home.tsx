@@ -84,9 +84,9 @@ function NewHome() {
           </p>
         </section>
       </main>
-      <footer className={styles.footer}>
+      <footer>
         <p>© 2025 OneHand</p>
-        <a>Terms</a> <a>Privacy</a> <a>Notice</a> <a>Legal</a>{" "}
+        <a>Terms</a> <a>Privacy</a> <a>Notice</a> <a>Legal</a>
         <a>Accessibility</a> <a>Statement</a> <a>Cookie</a> <a>Policy</a>
       </footer>
     </div>
