@@ -4,7 +4,7 @@
     border-radius: 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    background-color: white;
+    background-color: transparent;
     transition: transform 0.3s ease;
     cursor: pointer;
     max-width: 100%;
@@ -12,6 +12,7 @@
 .sectioncontainer {
     display: flex;
     flex-direction: column;
+    padding: 0.8rem 0rem;
 }
 .container:hover {
     transform: translateY(-4px);
@@ -48,12 +49,29 @@
     display: flex;
     justify-content: space-between;
 }
+.ProgressBar {
+    width: 100%;
+    padding: 20px;
+}
+.verifiedContainer {
+    display: flex;
+    flex-direction: row;
+}
+.infocontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
 
 @media (max-width: 450px) {
     .container {
         display: flex;
         flex-direction: row;
+        overflow: hidden;
     }
+
     .image {
         width: 25%;
         height: auto;
@@ -61,23 +79,53 @@
         display: block;
         aspect-ratio: 16 / 9; /* keeps a good ratio across sizes */
     }
+    .sectioncontainer {
+        background-color: transparent;
+        padding: 0.3rem 1rem 0.3rem 0.5rem;
+        gap: 0.2rem;
+        font-size: clamp(0.8rem, 2vw, 1.1rem);
+        width: 100%;
+    }
 
-    .container > div {
+    .sectioncontainer > div {
         padding: 0rem;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0rem;
     }
 
-    .container > div img {
+    .sectioncontainer > div img {
         width: 24px;
-        height: 24px;
+        height: auto;
         object-fit: contain;
     }
 
-    .container p {
-        font-size: clamp(0.9rem, 2vw, 1.1rem);
+    .sectioncontainer p {
         font-weight: 500;
         margin: 0;
+    }
+    .infocontainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0rem;
+        justify-content: space-between;
+    }
+    /* Push verified to bottom */
+    .verifiedContainer {
+        padding-top: unset;
+        gap: unset;
+        display: none;
+    }
+    .title {
+        padding-left: 0 !important;
+        margin-bottom: 0.5rem;
+    }
+    .ProgressBar {
+        padding: unset;
+    }
+    .info {
+        display: flex;
+        justify-content: space-between;
     }
 }
