@@ -7,8 +7,10 @@ import Technology from "../assets/category/innovation.png";
 import Restoring from "../assets/category/restore.png";
 import Business from "../assets/category/investment.png";
 import CampaignCard from "../componenets/CampaignCard";
+import { useNavigate } from "react-router-dom";
 
 function NewHome() {
+  const naviage = useNavigate();
   return (
     <div className={styles.container}>
       <nav>{/* <ToolBar /> */}</nav>
@@ -31,7 +33,9 @@ function NewHome() {
             <label className={styles.alttext}>
               Launch a fundraiser to support the causes you care about.
             </label>
-            <button>Start a Campaign</button>
+            <button type="button" onClick={() => naviage("/login")}>
+              Start a Campaign
+            </button>
           </div>
         </section>
         {/* caregory section */}
