@@ -32,21 +32,18 @@ a:hover {
 html,
 body,
 #root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "nav"
+        "main"
+        "footer";
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
     background-color: white;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    min-width: 100vw;
-    min-height: 100vh;
 }
 
 h1 {

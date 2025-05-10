@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 function NewHome() {
   const naviage = useNavigate();
   return (
-    <div className={styles.container}>
+    <>
       <nav>{/* <ToolBar /> */}</nav>
       <main className={styles.container}>
         {/* Hero section */}
@@ -93,7 +93,7 @@ function NewHome() {
         <a>Terms</a> <a>Privacy</a> <a>Notice</a> <a>Legal</a>
         <a>Accessibility</a> <a>Statement</a> <a>Cookie</a> <a>Policy</a>
       </footer>
-    </div>
+    </>
   );
 }
 
