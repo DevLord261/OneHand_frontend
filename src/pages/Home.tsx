@@ -13,7 +13,6 @@ function NewHome() {
   const naviage = useNavigate();
   return (
     <>
-      <nav>{/* <ToolBar /> */}</nav>
       <main className={styles.container}>
         {/* Hero section */}
         <section className={styles.herosection}>
@@ -88,11 +87,6 @@ function NewHome() {
           </p>
         </section>
       </main>
-      <footer>
-        <p>© 2025 OneHand</p>
-        <a>Terms</a> <a>Privacy</a> <a>Notice</a> <a>Legal</a>
-        <a>Accessibility</a> <a>Statement</a> <a>Cookie</a> <a>Policy</a>
-      </footer>
     </>
   );
 }

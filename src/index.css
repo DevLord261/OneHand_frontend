@@ -44,6 +44,7 @@ body,
     width: 100%;
     overflow-x: hidden;
     background-color: white;
+    color: black;
 }
 
 h1 {
@@ -68,6 +69,18 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+nav {
+    grid-area: nav;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+main {
+    position: relative;
+    grid-area: main;
+    height: 100%;
+    max-width: 100vw;
 }
 
 @media (prefers-color-scheme: light) {
