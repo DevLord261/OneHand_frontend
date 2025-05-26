@@ -6,10 +6,11 @@ import Home from "./pages/Home.tsx";
 import Login from "./pages/Login.tsx";
 import Campaign from "./pages/ViewCampaign.tsx";
 import ToolBar from "./componenets/ToolBar.tsx";
+import CreateCampaign from "./pages/CreateCampaign.tsx";
 
-function App() {
+export default function App() {
   const location = useLocation();
-  const noFooterRoutes = ["/login"];
+  const noFooterRoutes = ["/login", "/createcampaign"];
   const hideFooter = noFooterRoutes.includes(location.pathname);
 
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/campaign:id" element={<Campaign />} />
+        <Route path="/createcampaign" element={<CreateCampaign />} />
       </Routes>
       {!hideFooter && (
         <footer>
