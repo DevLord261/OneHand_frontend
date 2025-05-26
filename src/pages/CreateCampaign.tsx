@@ -39,41 +39,7 @@ const CreateCampaign = () => {
     },
   ]);
 
-  const [content, setContent] = useState(`# Welcome to Markdown Editor
-
-## Getting Started
-This editor works just like GitHub README files!
-
-### Headers Are Now Properly Styled
-Use # for headers:
-- # Main Header (H1)
-- ## Section Header (H2)
-- ### Subsection (H3)
-
-### Text Formatting
-- **Bold text** works perfectly
-- *Italic text* is styled
-- ~~Strikethrough text~~ has line through
-- \`inline code\` has background
-
-### Links and Images
-[Link text](https://example.com)
-
-Using image from gallery:
-![Beautiful landscape](img:1)
-
-### Lists
-1. Numbered list item
-2. Another numbered item
-
-- Bullet point
-- Another bullet point
-
-> This is a blockquote with proper styling
-
----
-
-Start editing to see the magic happen!`);
+  const [content, setContent] = useState("text");
 
   const [preview, setPreview] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
@@ -227,13 +193,17 @@ Start editing to see the magic happen!`);
       let html = markdown;
 
       // Replace image IDs with actual URLs
-      html = html.replace(/!\[([^\]]*)\]\(img:(\d+)\)/g, (alt, id) => {
-        const image = imageDatabase.find((img) => img.id === parseInt(id));
-        if (image) {
-          return `![${alt}](${image.url})`;
-        }
-        return `![${alt}](broken-image)`;
-      });
+      html = html.replace(
+        /!\[([^\]]*)\]\(img:(\d+)\)/g,
+        (_match: string, alt: string, id: string) => {
+          const image = imageDatabase.find((img) => img.id === parseInt(id));
+          if (image) {
+            return `![${alt}](${image.url})`;
+          }
+          // Return error message directly as HTML instead of broken markdown
+          return `<div style="padding: 20px; background: #fee2e2; border: 1px solid #fecaca; border-radius: 8px; color: #dc2626; text-align: center; margin: 16px 0;">Image not found: ${alt} (ID: ${id})</div>`;
+        },
+      );
 
       const lines = html.split("\n");
       const processedLines = lines.map((line) => {
@@ -280,6 +250,21 @@ Start editing to see the magic happen!`);
           /!\[([^\]]*)\]\(([^)]+)\)/g,
           '<img src="$2" alt="$1" style="max-width: 100%; height: auto; margin: 16px 0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);" onError="this.style.display=\'none\'; this.nextSibling.style.display=\'block\';" /><div style="display:none; padding: 20px; background: #fee2e2; border: 1px solid #fecaca; border-radius: 8px; color: #dc2626; text-align: center;">Image failed to load: $1</div>',
         )
+        .replace(
+          /!\[([^\]]*)\]\(([^)]+)\)/g,
+          (match: string, alt: string, url: string) => {
+            // Skip if it's already processed or if URL is "broken-image"
+            if (
+              url === "broken-image" ||
+              url.startsWith("data:") ||
+              url.startsWith("http")
+            ) {
+              return `<img src="${url}" alt="${alt}" style="max-width: 100%; height: auto; margin: 16px 0; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);" onError="this.style.display='none'; this.nextSibling.style.display='block';" /><div style="display:none; padding: 20px; background: #fee2e2; border: 1px solid #fecaca; border-radius: 8px; color: #dc2626; text-align: center;">Image failed to load: ${alt}</div>`;
+            }
+            return match; // Don't process invalid URLs
+          },
+        )
+
         .replace(
           /\[([^\]]+)\]\(([^)]+)\)/g,
           '<a href="$2" target="_blank" style="color: #3b82f6; text-decoration: underline; font-weight: 500;">$1</a>',
