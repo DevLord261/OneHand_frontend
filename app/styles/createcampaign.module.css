@@ -1,0 +1,322 @@
+.container {
+    min-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    background-color: #ffffff;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0;
+}
+
+.headerControls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stats {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.button {
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover {
+    background-color: #f3f4f6;
+}
+
+.buttonActive {
+    background-color: #3b82f6;
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+.buttonActive:hover {
+    background-color: #2563eb;
+}
+
+.gallery {
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #f9fafb;
+}
+
+.galleryHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.galleryTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.galleryControls {
+    display: flex;
+    gap: 8px;
+}
+
+.uploadButton {
+    padding: 4px 12px;
+    background-color: #3b82f6;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.uploadButton:hover {
+    background-color: #2563eb;
+}
+
+.galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 12px;
+}
+
+.galleryItem {
+    position: relative;
+}
+
+.galleryImage {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.galleryImage:hover {
+    opacity: 0.75;
+}
+
+.deleteButton {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: #ef4444;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.galleryItem:hover .deleteButton {
+    opacity: 1;
+}
+
+.deleteButton:hover {
+    background-color: #dc2626;
+}
+
+.imageFilename {
+    font-size: 12px;
+    margin-top: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.toolbar {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.toolbarContent {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.toolbarGroup {
+    display: flex;
+    gap: 4px;
+}
+
+.separator {
+    width: 1px;
+    height: 24px;
+    background-color: #d1d5db;
+    margin: 0 4px;
+}
+
+.select {
+    padding: 4px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+.editorContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.editorSection {
+    display: block;
+}
+
+.editorSectionHidden {
+    display: none;
+}
+
+.previewOnly {
+    display: block;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.textareaContainer {
+    position: relative;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    color: black;
+}
+
+.textareaContainerDrag {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+}
+
+.textarea {
+    width: 100%;
+    height: 400px;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    resize: none;
+    outline: none;
+    font-family: Monaco, Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: black;
+}
+
+.dragOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(239, 246, 255, 0.9);
+    border-radius: 8px;
+}
+
+.dragContent {
+    text-align: center;
+    color: #3b82f6;
+}
+
+.dragContent p {
+    font-weight: 600;
+    margin: 0;
+    margin-top: 8px;
+}
+
+.preview {
+    /* height: 100; */
+    min-height: 400px;
+    padding: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow: auto;
+}
+
+.guide {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 8px;
+}
+
+.guideTitle {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 12px;
+    margin-top: 0;
+}
+
+.guideGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.guideSection {
+    font-size: 14px;
+}
+
+.guideSectionTitle {
+    font-weight: 500;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.codeBlock {
+    display: block;
+    background-color: #ffffff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-family: Monaco, Menlo, monospace;
+    font-size: 13px;
+    white-space: pre-line;
+}
+
+.hiddenInput {
+    display: none;
+}

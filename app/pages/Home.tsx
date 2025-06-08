@@ -1,29 +1,16 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
-
-import CategoryCard from "~/components/Card";
-import CampaignCard from "~/components/CampaignCard";
-import { Link } from "@remix-run/react";
+// import ToolBar from "~/componenets/ToolBar";
 import styles from "~/styles/Home.module.css";
-export const meta: MetaFunction = () => {
-  return [
-    { title: "OneHand" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-};
+import Hero from "/assets/Hero.jpg";
+import CategoryCard from "~/components/Card";
+import Medical from "/assets/category/medic.png";
+import Technology from "/assets/category/innovation.png";
+import Restoring from "/assets/category/restore.png";
+import Business from "/assets/category/investment.png";
+import CampaignCard from "~/components/CampaignCard";
+import { useNavigate } from "react-router-dom";
 
-export const Links: LinksFunction = () => [
-  {
-    page: "/auth",
-  },
-];
-
-const Hero = "/assets/Hero.jpg";
-const Medical = "/assets/category/medic.png";
-const Technology = "/assets/category/innovation.png";
-const Restoring = "/assets/category/restore.png";
-const Business = "/assets/category/investment.png";
-
-export default function Index() {
+function NewHome() {
+  const naviage = useNavigate();
   return (
     <>
       <main className={styles.container}>
@@ -39,15 +26,15 @@ export default function Index() {
             ></img>
           </picture>
           <div className={styles.textbox}>
-            <p className={styles.maintext}>
+            <label className={styles.maintext}>
               A Helping Hand for a Better Tomorrow
-            </p>
-            <p className={styles.alttext}>
+            </label>
+            <label className={styles.alttext}>
               Launch a fundraiser to support the causes you care about.
-            </p>
-            <Link type="button" to={"/auth"} prefetch="render">
+            </label>
+            <button type="button" onClick={() => naviage("/login")}>
               Start a Campaign
-            </Link>
+            </button>
           </div>
         </section>
         {/* caregory section */}
@@ -56,25 +43,21 @@ export default function Index() {
             <h2 className={styles.categtitle}>Top Categories</h2>
             <div>
               <p>
-                Explore fundraiser in some of the platform`&apos;`s most popular
+                Explore fundraiser in some of the platform's most popular
                 categories.
               </p>
               <p> There is more cause you can support - just check them all.</p>
             </div>
           </div>
-          <Link
-            className="see-all-categories"
+          <a
             style={{
               cursor: "pointer",
               fontSize: "18px",
               height: "fit-content",
-              textDecoration: "underline",
-              color: "#007bff",
             }}
-            to={""}
           >
             See all categories
-          </Link>
+          </a>
         </section>
         {/* categoryContainer */}
         <section className={styles.categoryScrollWrapper}>
@@ -107,3 +90,5 @@ export default function Index() {
     </>
   );
 }
+
+export default NewHome;
