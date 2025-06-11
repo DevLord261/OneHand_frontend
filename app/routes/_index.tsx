@@ -2,8 +2,10 @@ import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
 import CategoryCard from "~/components/Card";
 import CampaignCard from "~/components/CampaignCard";
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
+
 import styles from "~/styles/Home.module.css";
+import { Campaign } from "~/types/campaign";
 export const meta: MetaFunction = () => {
   return [
     { title: "OneHand" },
@@ -23,7 +25,14 @@ const Technology = "/assets/category/innovation.png";
 const Restoring = "/assets/category/restore.png";
 const Business = "/assets/category/investment.png";
 
+export async function loader() {
+  const res = await fetch("http://localhost:8080/campaign/featured");
+  const campaigns: Campaign[] = await res.json();
+  return campaigns;
+}
+
 export default function Index() {
+  const campaigns = useLoaderData<typeof loader>();
   return (
     <>
       <main className={styles.container}>
@@ -87,9 +96,9 @@ export default function Index() {
         </section>
         <section className={styles.Categcontainer}>
           <h1>Featured Campaigns</h1>
-          <CampaignCard />
-          <CampaignCard />
-          <CampaignCard />
+          {campaigns.map((camp) => (
+            <CampaignCard key={camp.id} campaign={camp} />
+          ))}
         </section>
         <section className={styles.trustworthy}>
           <h3>Fundraising on OneHand is easy, powerful, and trusted.</h3>

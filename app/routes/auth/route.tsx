@@ -1,81 +1,86 @@
 import { useState } from "react";
+import { ActionFunctionArgs } from "@remix-run/node";
+import { Form, redirect } from "@remix-run/react";
+import { json } from "@remix-run/node";
 import styles from "~/styles/Login.module.css";
 import clsx from "clsx";
 import { Link } from "@remix-run/react";
 
-interface User {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  password: string;
-  role: "GUEST";
-  emailVerified: false;
-  phoneVerified: false;
-  phoneNumber: string;
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+  if (intent == "login") {
+    // const username = String(formData.get("username"));
+    // const password = String(formData.get("password"));
+    try {
+      const res = await fetch("http://localhost:8080/users/login", {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: formData,
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("User created successfully:", data);
+        return redirect("/");
+        // return json({ success: true, user: data });
+      } else {
+        console.error("Error creating user:", res);
+        return json(
+          { success: false, error: res.statusText },
+          { status: res.status }
+        );
+      }
+    } catch (e) {
+      console.error(`Error ${e}`);
+      return json({ success: false });
+    }
+  } else {
+  }
 }
 
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
-  const [user, setUser] = useState<User>({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    password: "",
-    role: "GUEST",
-    emailVerified: false,
-    phoneVerified: false,
-    phoneNumber: "",
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setUser((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   // Handle form submission
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:8080/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
+  //   try {
+  //     const response = await fetch("http://localhost:8080/users", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(user),
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("User created successfully:", data);
-      } else {
-        console.error("Error creating user:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       console.log("User created successfully:", data);
+  //     } else {
+  //       console.error("Error creating user:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   return (
     <main className={styles.background}>
       <div className={clsx(styles.container, { [styles.active]: isActive })}>
         {/* Login Form */}
         <section className={clsx(styles["form-box"], styles.login)}>
-          <form action="#">
+          <Form method="POST">
             <h1>Login</h1>
+            <input type="hidden" name="intent" value="login" />
             <div className={styles["input-box"]}>
               <input
                 type="text"
                 placeholder="Username"
                 required
-                name="username"
-                value={user.username}
-                onChange={handleInputChange}
+                name="userName"
               />
               <i className="bx bxs-user"></i>
             </div>
@@ -85,8 +90,6 @@ export default function Login() {
                 placeholder="Password"
                 required
                 name="password"
-                value={user.password}
-                onChange={handleInputChange}
               />
               <i className="bx bxs-lock-alt"></i>
             </div>
@@ -96,21 +99,20 @@ export default function Login() {
             <button type="submit" className={styles.btn}>
               Login
             </button>
-          </form>
+          </Form>
         </section>
 
         {/* Registration Form */}
         <section className={clsx(styles["form-box"], styles.register)}>
-          <form onSubmit={handleSubmit}>
+          <Form method="POST">
             <h1>Registration</h1>
+            <input type="hidden" name="intent" value="register" />
             <div className={styles["input-box"]}>
               <input
                 type="text"
                 placeholder="FirstName"
                 required
                 name="firstName"
-                value={user.firstName}
-                onChange={handleInputChange}
               />
               <i className="bx bxs-user"></i>
             </div>
@@ -120,8 +122,6 @@ export default function Login() {
                 placeholder="LastName"
                 required
                 name="lastName"
-                value={user.lastName}
-                onChange={handleInputChange}
               />
               <i className="bx bxs-user"></i>
             </div>
@@ -131,20 +131,11 @@ export default function Login() {
                 placeholder="Username"
                 required
                 name="username"
-                value={user.username}
-                onChange={handleInputChange}
               />
               <i className="bx bxs-user"></i>
             </div>
             <div className={styles["input-box"]}>
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                name="email"
-                value={user.email}
-                onChange={handleInputChange}
-              />
+              <input type="email" placeholder="Email" required name="email" />
               <i className="bx bxs-envelope"></i>
             </div>
             <div className={styles["input-box"]}>
@@ -153,8 +144,6 @@ export default function Login() {
                 placeholder="Password"
                 required
                 name="password"
-                value={user.password}
-                onChange={handleInputChange}
               />
               <i className="bx bxs-lock-alt"></i>
             </div>
@@ -176,7 +165,7 @@ export default function Login() {
                 <i className="bx bxl-linkedin"></i>
               </a>
             </div> */}
-          </form>
+          </Form>
         </section>
 
         {/* Toggle Panels */}
