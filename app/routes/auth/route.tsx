@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ActionFunctionArgs } from "@remix-run/node";
-import { Form, redirect } from "@remix-run/react";
+import { Form, redirect, useActionData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 import styles from "~/styles/Login.module.css";
 import clsx from "clsx";
@@ -9,63 +9,33 @@ import { Link } from "@remix-run/react";
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const intent = formData.get("intent");
-  if (intent == "login") {
-    // const username = String(formData.get("username"));
-    // const password = String(formData.get("password"));
-    try {
+
+  try {
+    if (intent == "login") {
       const res = await fetch("http://localhost:8080/users/login", {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
         body: formData,
       });
       if (res.ok) {
         const data = await res.json();
-        console.log("User created successfully:", data);
+
         return redirect("/");
-        // return json({ success: true, user: data });
       } else {
-        console.error("Error creating user:", res);
-        return json(
-          { success: false, error: res.statusText },
-          { status: res.status }
-        );
+        return json({ error: "Inavlid username or email" });
       }
-    } catch (e) {
-      console.error(`Error ${e}`);
-      return json({ success: false });
+    } else if (intent == "register") {
+      return json({ error: "not using it yet" });
     }
-  } else {
+
+    return json({ status: 200, success: true });
+  } catch (e) {
+    console.error(e);
   }
 }
 
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
-
-  // Handle form submission
-  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await fetch("http://localhost:8080/users", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(user),
-  //     });
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       console.log("User created successfully:", data);
-  //     } else {
-  //       console.error("Error creating user:", response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+  const actionData = useActionData<typeof action>();
 
   return (
     <main className={styles.background}>
@@ -96,6 +66,11 @@ export default function Login() {
             <div className={styles["forgot-link"]}>
               <Link to={""}>Forgot Password?</Link>
             </div>
+            {actionData && "error" in actionData && (
+              <div style={{ color: "red", marginBottom: "12px" }}>
+                {actionData.error}
+              </div>
+            )}
             <button type="submit" className={styles.btn}>
               Login
             </button>
