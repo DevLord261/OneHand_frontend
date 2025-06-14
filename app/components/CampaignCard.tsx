@@ -9,7 +9,7 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
     <div className={styles.container}>
       <img
         className={styles.image}
-        src={`data:image/jpeg;base64,${campaign.base64image}`}
+        src={campaign.mainimage}
         alt="solar energy"
         loading="lazy"
       />

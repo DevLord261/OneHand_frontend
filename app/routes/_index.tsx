@@ -26,9 +26,14 @@ const Restoring = "/assets/category/restore.png";
 const Business = "/assets/category/investment.png";
 
 export async function loader() {
-  const res = await fetch("http://localhost:8080/campaign/featured");
-  const campaigns: Campaign[] = await res.json();
-  return campaigns;
+  try {
+    const res = await fetch("http://localhost:8080/campaign/featured");
+    const campaigns: Campaign[] = await res.json();
+    return campaigns;
+  } catch (e) {
+    console.error("Something wen't wrong");
+    return [];
+  }
 }
 
 export default function Index() {

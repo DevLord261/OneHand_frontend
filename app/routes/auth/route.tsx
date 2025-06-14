@@ -9,24 +9,29 @@ import { Link } from "@remix-run/react";
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const intent = formData.get("intent");
+  const API_URL = process.env.REACT_APP_API_URL;
 
   try {
     if (intent == "login") {
-      const res = await fetch("http://localhost:8080/users/login", {
+      const res = await fetch(`${API_URL}/users/login`, {
         method: "POST",
         body: formData,
       });
       if (res.ok) {
-        const data = await res.json();
-
         return redirect("/");
-      } else {
-        return json({ error: "Inavlid username or email" });
       }
+      return json({ error: "Inavlid username or email", status: 401 });
     } else if (intent == "register") {
-      return json({ error: "not using it yet" });
+      const res = await fetch(`${API_URL}/users/newuser`, {
+        method: `POST`,
+        body: formData,
+      });
+      if (res.ok) {
+        return redirect("/");
+      }
+      console.log(res);
+      return json({ error: "Failed to create user", status: 401 });
     }
-
     return json({ status: 200, success: true });
   } catch (e) {
     console.error(e);

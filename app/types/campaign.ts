@@ -7,5 +7,5 @@ export interface Campaign {
   donationGoal: string;
   category: string;
   isFeatured: false;
-  base64image: string;
+  mainimage: string;
 }
