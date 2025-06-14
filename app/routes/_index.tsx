@@ -26,12 +26,14 @@ const Restoring = "/assets/category/restore.png";
 const Business = "/assets/category/investment.png";
 
 export async function loader() {
+  const API_URL = process.env.REACT_APP_API_URL;
   try {
-    const res = await fetch("http://localhost:8080/campaign/featured");
+    const res = await fetch(`${API_URL}/campaign/feature`);
     const campaigns: Campaign[] = await res.json();
     return campaigns;
   } catch (e) {
     console.error("Something wen't wrong");
+    console.error(e);
     return [];
   }
 }
