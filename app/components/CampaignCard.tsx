@@ -2,11 +2,13 @@ import styles from "~/styles/CampaignCard.module.css";
 import ProgressBar from "./PrograssBar";
 import { Campaign } from "~/types/campaign";
 
-const Verified = "/assets/verified.png";
+import { BadgeCheckIcon } from "lucide-react";
+import { Badge } from "./ui/badge";
+import { Link, useNavigate } from "@remix-run/react";
 
 export default function CampaignCard({ campaign }: { campaign: Campaign }) {
   return (
-    <div className={styles.container}>
+    <Link className={styles.container} to={`/campaign/${campaign.id}`}>
       <img
         className={styles.image}
         src={campaign.mainimage}
@@ -25,13 +27,18 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           <p>Goal: ${campaign.donationGoal}</p>
         </div>
         <div className={styles.infocontainer}>
-          <div className={styles.verifiedContainer}>
-            <img src={Verified} alt="verified badge" />
-            <p>Verified</p>
-          </div>
+          {/* <div className={styles.verifiedContainer}> */}
+          <Badge
+            variant="secondary"
+            className="bg-blue-500 text-white dark:bg-blue-600"
+          >
+            <BadgeCheckIcon />
+            Verified
+          </Badge>
+          {/* </div> */}
           <p>Location: {campaign.location}</p>
         </div>
       </section>
-    </div>
+    </Link>
   );
 }

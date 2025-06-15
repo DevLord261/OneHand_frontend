@@ -6,4 +6,4 @@ node_modules
 
 /app/build
 
-bun.lock
+/bun.lock
