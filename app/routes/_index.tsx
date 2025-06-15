@@ -27,10 +27,12 @@ const Business = "/assets/category/investment.png";
 
 export async function loader() {
   const API_URL = process.env.REACT_APP_API_URL;
+
   try {
-    const res = await fetch(`${API_URL}/campaign/feature`);
+    const res = await fetch(`${API_URL}/campaign/featured`);
     const campaigns: Campaign[] = await res.json();
-    return campaigns;
+    if (res.ok) return campaigns;
+    return [];
   } catch (e) {
     console.error("Something wen't wrong");
     console.error(e);
@@ -39,7 +41,7 @@ export async function loader() {
 }
 
 export default function Index() {
-  const campaigns = useLoaderData<typeof loader>();
+  const campaigns = useLoaderData<Campaign[]>();
   return (
     <>
       <main className={styles.container}>
@@ -103,9 +105,10 @@ export default function Index() {
         </section>
         <section className={styles.Categcontainer}>
           <h1>Featured Campaigns</h1>
-          {campaigns.map((camp) => (
-            <CampaignCard key={camp.id} campaign={camp} />
-          ))}
+          {Array.isArray(campaigns) &&
+            campaigns.map((camp) => (
+              <CampaignCard key={camp.id.toString()} campaign={camp} />
+            ))}
         </section>
         <section className={styles.trustworthy}>
           <h3>Fundraising on OneHand is easy, powerful, and trusted.</h3>
