@@ -22,7 +22,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 
   return data;
 }
-export default function Campaign() {
+export default function ViewCampaign() {
   const campaign = useLoaderData<Campaign>();
   return (
     <main className={styles.container}>
