@@ -4,4 +4,6 @@ node_modules
 /build
 .env
 
-app/build
+/app/build
+
+bun.lock
