@@ -8,4 +8,5 @@ export interface Campaign {
   category: string;
   isFeatured: false;
   mainimage: string;
+  multpleimages: string[];
 }

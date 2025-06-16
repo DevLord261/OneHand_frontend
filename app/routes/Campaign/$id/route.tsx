@@ -20,10 +20,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw new Response("unauthorized access", { status: 400 });
   }
 
-  return data;
+  return data as Campaign;
 }
 export default function ViewCampaign() {
-  const campaign = useLoaderData<Campaign>();
+  const campaign = useLoaderData<typeof loader>();
   return (
     <main className={styles.container}>
       <section className={styles.mainimage}>
