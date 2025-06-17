@@ -13,7 +13,6 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
         className={styles.image}
         src={campaign.mainimage}
         alt="solar energy"
-        loading="lazy"
       />
       <section className={styles.sectioncontainer}>
         <h3 className={styles.title} style={{ paddingLeft: "20px" }}>

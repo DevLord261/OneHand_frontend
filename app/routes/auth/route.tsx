@@ -5,6 +5,8 @@ import { json } from "@remix-run/node";
 import styles from "~/styles/Login.module.css";
 import clsx from "clsx";
 import { Link } from "@remix-run/react";
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+import { AlertCircleIcon } from "lucide-react";
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
@@ -72,9 +74,11 @@ export default function Login() {
               <Link to={""}>Forgot Password?</Link>
             </div>
             {actionData && "error" in actionData && (
-              <div style={{ color: "red", marginBottom: "12px" }}>
-                {actionData.error}
-              </div>
+              <Alert variant={"destructive"} style={{ padding: 12 }}>
+                <AlertCircleIcon />
+                <AlertTitle> Failed to login</AlertTitle>
+                <AlertDescription>Wrong username or password</AlertDescription>
+              </Alert>
             )}
             <button type="submit" className={styles.btn}>
               Login
@@ -130,21 +134,6 @@ export default function Login() {
             <button type="submit" className={styles.btn}>
               Register
             </button>
-            {/* <p>or register with social platforms</p>
-            <div className={styles["social-icons"]}>
-              <a href="#">
-                <i className="bx bxl-google"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-facebook"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-github"></i>
-              </a>
-              <a href="#">
-                <i className="bx bxl-linkedin"></i>
-              </a>
-            </div> */}
           </Form>
         </section>
 

@@ -27,9 +27,8 @@ export default function ViewCampaign() {
   return (
     <main className={styles.container}>
       <section className={styles.mainimage}>
-        <img src="/main.webp" alt="main image" />
-
-        <section>
+        <img src={campaign.mainimage} alt="campaign image" />
+        <section className={styles.description}>
           <section>{campaign.id}</section>
           <div>Title</div>
           <section>
@@ -42,7 +41,7 @@ export default function ViewCampaign() {
           </section>
         </section>
       </section>
-      <section className={styles.dontaion}></section>
+      <section className={styles.dontaion}>hello world</section>
     </main>
   );
 }
