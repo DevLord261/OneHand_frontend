@@ -20,16 +20,15 @@ export async function loader({ params }: LoaderFunctionArgs) {
     throw new Response("unauthorized access", { status: 400 });
   }
 
-  return data;
+  return data as Campaign;
 }
-export default function Campaign() {
-  const campaign = useLoaderData<Campaign>();
+export default function ViewCampaign() {
+  const campaign = useLoaderData<typeof loader>();
   return (
     <main className={styles.container}>
       <section className={styles.mainimage}>
-        <img src="/main.webp" alt="main image" />
-
-        <section>
+        <img src={campaign.mainimage} alt="campaign image" />
+        <section className={styles.description}>
           <section>{campaign.id}</section>
           <div>Title</div>
           <section>
@@ -42,7 +41,7 @@ export default function Campaign() {
           </section>
         </section>
       </section>
-      <section className={styles.dontaion}></section>
+      <section className={styles.dontaion}>hello world</section>
     </main>
   );
 }
