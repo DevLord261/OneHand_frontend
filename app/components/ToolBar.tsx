@@ -1,32 +1,46 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"; // if you're using react-router
 import styles from "~/styles/ToolBar.module.css";
 import Logo from "/assets/Logo.png";
-import Search from "/assets/search.svg";
+import SearchIcon from "/assets/search.svg";
+
 export default function ToolBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Replace with actual auth check (e.g., token in localStorage or context)
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles["left-toolbar"]}>
-          <img
-            src={Logo}
-            alt="logo"
-            style={{ width: "64px", marginTop: "10px" }}
-          />
-          <div className={styles.enteris}>
-            <label> Donater </label>
-            <label> Fundraiser </label>
-          </div>
-        </div>
-        <div className={styles["search-box"]}>
-          <img src={Search} alt="Search icon" />
-          <input type="text" placeholder="Search" />
-        </div>
-        <div className={styles["right-toolbar"]}>
-          <label> About </label>
-          <a type="button" href="login">
-            Sign In
-          </a>
-        </div>
+    <div className={styles.container}>
+      <div className={styles.left}>
+        <img src={Logo} alt="Logo" className={styles.logo} />
+        <Link to="/campaigns" className={styles.link}>
+          Campaigns
+        </Link>
       </div>
-    </>
+
+      <div className={styles.search}>
+        <img src={SearchIcon} alt="Search" />
+        <input type="text" placeholder="Search campaigns..." />
+      </div>
+
+      <div className={styles.right}>
+        <Link to="/wishlist" className={styles.link}>
+          Wishlist
+        </Link>
+        {isLoggedIn ? (
+          <Link to="/profile" className={styles.button}>
+            Profile
+          </Link>
+        ) : (
+          <Link to="/auth" className={styles.button}>
+            Sign In
+          </Link>
+        )}
+      </div>
+    </div>
   );
 }
