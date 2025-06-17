@@ -6,6 +6,7 @@ import { Link, useLoaderData } from "@remix-run/react";
 
 import styles from "~/styles/Home.module.css";
 import { Campaign } from "~/types/campaign";
+import ToolBar from "~/components/ToolBar";
 export const meta: MetaFunction = () => {
   return [
     { title: "OneHand" },
@@ -40,6 +41,7 @@ export default function Index() {
   const campaigns = useLoaderData<typeof loader>();
   return (
     <>
+      <ToolBar />
       <main className={styles.container}>
         {/* Hero section */}
         <section className={styles.herosection}>
