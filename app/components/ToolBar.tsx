@@ -7,12 +7,6 @@ import SearchIcon from "/assets/search.svg";
 export default function ToolBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    // Replace with actual auth check (e.g., token in localStorage or context)
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
