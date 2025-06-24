@@ -1,7 +1,7 @@
 import "~/components/tiptap-node/paragraph-node/paragraph-node.scss";
 import "~/components/tiptap-node/image-node/image-node.scss";
 
-import {forwardRef, HTMLAttributes, useEffect, useRef, useState} from "react";
+import {forwardRef, HTMLAttributes} from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 
 import { StarterKit } from "@tiptap/starter-kit";
@@ -15,19 +15,31 @@ import { Subscript } from "@tiptap/extension-subscript";
 import { MarkButton } from "./tiptap-ui/mark-button";
 import { TextAlignButton } from "./tiptap-ui/text-align-button";
 import { TextAlign } from "@tiptap/extension-text-align";
-import { Editor } from "@tiptap/core";
+import {ImageUploadButton} from "~/components/tiptap-ui/image-upload-button";
+import { ImageUploadNode } from "./tiptap-node/image-upload-node";
+
 
 const content = "<p>Hello World!</p>";
 const TextEditor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     TextEditor.displayName = "Editor";
 
+    const handleImageUpload = ()=>{
+
+    }
     const editor = useEditor({
 
       extensions: [
         StarterKit,
-        Image,
-        Underline,
+          Image,
+          ImageUploadNode.configure({
+              accept: 'image/*',
+              maxSize: 4096*4096,
+              limit: 3,
+              upload: handleImageUpload,
+              onError: (error) => console.error('Upload failed:', error),
+          }),
+          Underline,
         Superscript,
         Subscript,
           Paragraph.configure({
@@ -70,7 +82,7 @@ const TextEditor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
           <TextAlignButton align="right" />
           <TextAlignButton align="justify" />
           <Separator orientation="vertical" className="h-6 w-0.5" />
-          {/*<ImageUploadButton text="Add" />*/}
+          <ImageUploadButton text="Add" />
         </div>
         <EditorContent
           editor={editor}
