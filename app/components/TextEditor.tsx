@@ -3,7 +3,7 @@ import "~/components/tiptap-node/image-node/image-node.scss";
 
 import {forwardRef, HTMLAttributes} from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
-
+import {Editor} from "@tiptap/core";
 import { StarterKit } from "@tiptap/starter-kit";
 import { HeadingButton } from "./tiptap-ui/heading-button";
 import { Separator } from "./ui/Separator";
@@ -19,22 +19,59 @@ import {ImageUploadButton} from "~/components/tiptap-ui/image-upload-button";
 import { ImageUploadNode } from "./tiptap-node/image-upload-node";
 
 
-const content = "<p>Hello World!</p>";
-const TextEditor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
+
+
+interface TextEditorProps extends HTMLAttributes<HTMLDivElement> {
+    onUpdate?: (html:string) => void; // or any other method signature
+}
+const TextEditor = forwardRef<HTMLDivElement, TextEditorProps>(
+  ({ className ,onUpdate,...props }, ref) => {
     TextEditor.displayName = "Editor";
+    const MAX_FILE_SIZE = 2048*2048;
+    const handleImageUpload = async (file:File,onProgress?: (event: { progress: number }) => void,abortSignal?: AbortSignal):Promise<string> =>{
 
-    const handleImageUpload = ()=>{
+        if (!file) {
+            throw new Error("No file provided")
+        }
+        if (file.size > MAX_FILE_SIZE) {
+            throw new Error(
+                `File size exceeds maximum allowed (${MAX_FILE_SIZE / (1024 * 1024)}MB)`
+            )
+        }
+        try{
 
+            let url="";
+            for (let progress = 0; progress <= 100; progress += 10) {
+                if (abortSignal?.aborted) {
+                    throw new Error("Upload cancelled")
+                }
+                await new Promise((resolve) => setTimeout(resolve, 500))
+                onProgress?.({ progress })
+                const formdata = new FormData();
+                formdata.append("list",file);
+                const res = await fetch(`http://localhost:8080/campaign/api/upload`,{
+                    method:"POST",
+                    body: formdata
+                });
+                if(!res.ok) return "";
+                url = await res.text();
+
+            }
+            return url;
+
+        }catch(e){
+            console.error(e);
+        }
+        return "";
     }
-    const editor = useEditor({
 
+    const editor:Editor|null = useEditor({
       extensions: [
         StarterKit,
           Image,
           ImageUploadNode.configure({
               accept: 'image/*',
-              maxSize: 4096*4096,
+              maxSize: MAX_FILE_SIZE,
               limit: 3,
               upload: handleImageUpload,
               onError: (error) => console.error('Upload failed:', error),
@@ -42,18 +79,20 @@ const TextEditor = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
           Underline,
         Superscript,
         Subscript,
-          Paragraph.configure({
-              HTMLAttributes: {
-                  class: 'fixspace',
-              },
-          }),
+      Paragraph.configure({
+          HTMLAttributes: {
+              class: 'fixspace',
+          },
+      }),
         TextAlign.configure({
-          types: ["heading", "paragraph"],
+          types: ["heading"],
         }),
       ],
-      immediatelyRender: false,
-      content: content,
-      autofocus: true,
+        immediatelyRender: false,
+        autofocus: true,
+        onUpdate:({editor})=>{
+          onUpdate?.(editor.getHTML());
+        },
     });
 
     return (

@@ -1,5 +1,5 @@
-import { LinksFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
+import {ActionFunctionArgs, LinksFunction} from "@remix-run/node";
+import {Form, useSubmit} from "@remix-run/react";
 import { format } from "date-fns";
 import {
   AlertCircle,
@@ -16,7 +16,7 @@ import {
   Tag,
   Target,
 } from "lucide-react";
-import { useState } from "react";
+import {useRef, useState} from "react";
 import { Editor } from "~/components/TextEditor";
 import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
@@ -132,19 +132,26 @@ const categories = [
   "Technology",
   "Other",
 ];
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  console.log(formData);
+  return null;
+}
 export default function CreateCampaign() {
+  const submit = useSubmit();
   const [currentStep, setCurrentStep] = useState(1);
   const [date, setDate] = useState<Date>();
   const [formData, setFormData] = useState({
     title: "",
-    goal: "",
+    donationGoal: "",
     country: "",
     city: "",
     shortDescription: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [selectedCategory, setSelectedCategory] = useState("");
-
+  const [description,setdescription] = useState("")
   const countries = [
     "United States",
     "Canada",
@@ -155,12 +162,13 @@ export default function CreateCampaign() {
     "Japan",
     "Other",
   ];
+  const formRef = useRef<HTMLFormElement>(null);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.title.trim()) newErrors.title = "Campaign title is required";
-    if (!formData.goal.trim()) newErrors.goal = "Donation goal is required";
+    if (!formData.donationGoal.trim()) newErrors.goal = "Donation goal is required";
     if (!formData.country.trim()) newErrors.country = "Country is required";
     if (!formData.city.trim()) newErrors.city = "City is required";
     if (!date) newErrors.date = "Campaign end date is required";
@@ -168,7 +176,7 @@ export default function CreateCampaign() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentStep === 1) {
       if (!selectedCategory) {
         // Show error for category selection
@@ -178,6 +186,27 @@ export default function CreateCampaign() {
     } else if (currentStep === 2) {
       if (validateForm()) {
         setCurrentStep(3);
+      }
+    }
+    else if(currentStep==steps.length){
+      const data = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        data.append(key, value);
+      });
+      data.append("category", selectedCategory);
+      data.append("date", date?.toISOString().split("T")[0] || "");
+      data.append("location",`${formData.country},${formData.city}`);
+      data.append("description",description.toString());
+      if (date) data.append("date", date?.toISOString().split("T")[0] || "");
+      try{
+        const res = await fetch("http://localhost:8080/campaign/create/cb42d2a5-fb2d-401a-b5ad-b55270e4a52b", {
+          method: "POST",
+          body:data });
+        const json = await res.json();
+        console.log(json);
+
+      }catch (e){
+        console.log(e)
       }
     }
   };
@@ -248,9 +277,9 @@ export default function CreateCampaign() {
               id="goal"
               type="number"
               placeholder="10000"
-              value={formData.goal}
+              value={formData.donationGoal}
               onChange={(e) =>
-                setFormData({ ...formData, goal: e.target.value })
+                setFormData({ ...formData, donationGoal: e.target.value })
               }
               className={cn(
                 "h-12 text-base",
@@ -540,7 +569,10 @@ export default function CreateCampaign() {
   const renderTextEditor = () => {
     return (
       <div className="h-full">
-        <Editor  />
+        <Editor onUpdate={(html)=>{
+          setdescription(html);
+          console.log(html);
+        }} />
       </div>
     );
   };
@@ -633,7 +665,8 @@ export default function CreateCampaign() {
           </div>
 
           {/* Main Content */}
-          <Form>
+          <Form method={"post"} ref={formRef}>
+            <input type={"hidden"} name={"title"} value={selectedCategory}/>
             <Card
               className={currentStep < 3 ? "cardcontainer" : "descpcontainer"}
             >
@@ -670,6 +703,7 @@ export default function CreateCampaign() {
                       className="gap-2 bg-indigo-600 hover:bg-indigo-700"
                       onClick={handleNext}
                       disabled={currentStep === 1 && !selectedCategory}
+
                     >
                       {currentStep === steps.length
                         ? "Create Campaign"
