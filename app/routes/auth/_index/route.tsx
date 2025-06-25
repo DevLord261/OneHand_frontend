@@ -2,8 +2,9 @@ import { useState } from "react";
 import { ActionFunctionArgs } from "@remix-run/node";
 import { Form, json, redirect, useActionData } from "@remix-run/react";
 
+import { authCookie } from "~/utils/session.server";
 import styles from "~/styles/Login.module.css";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { Link } from "@remix-run/react";
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 import { AlertCircleIcon } from "lucide-react";
@@ -15,36 +16,39 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     if (intent == "login") {
-      const res = await fetch(`${API_URL}/users/login`, {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         body: formData,
       });
-      if (res.ok) {
-        return redirect("/");
-      }
-      return json({ error: "Inavlid username or email", status: 401 });
+      if (!res.ok) return json({ error: "Login failed" }, { status: 401 });
+      const { token } = await res.json();
+
+      return redirect("/", {
+        headers: {
+          "Set-Cookie": await authCookie.serialize(token),
+        },
+      });
     } else if (intent == "register") {
-      const res = await fetch(`${API_URL}/users/newuser`, {
+      const res = await fetch(`${API_URL}/api/auth/newuser`, {
         method: `POST`,
         body: formData,
       });
       if (res.ok) {
-        const email = !formData.get("email");
-        return redirect(`/auth/verify?email=${encodeURIComponent(email)}`);
+        const email = formData.get("email"); // fix here: you had !formData.get("email")
+        return redirect(`/auth/verify?email=${email}`);
       }
-      console.log(res);
       return json({ error: "Failed to create user", status: 401 });
     }
     return json({ status: 200, success: true });
   } catch (e) {
     console.error(e);
+    return json({ error: "Unexpected error", status: 500 }); // <-- THIS IS THE FIX
   }
 }
 
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
   const actionData = useActionData<typeof action>();
-  const [isverify, setverify] = useState(false);
 
   return (
     <main className={styles.background}>

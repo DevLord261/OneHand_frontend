@@ -1,8 +1,12 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 
 import CategoryCard from "~/components/Card";
 import CampaignCard from "~/components/CampaignCard";
-import { Link, useLoaderData } from "@remix-run/react";
+import { json, Link, redirect, useLoaderData } from "@remix-run/react";
 
 import styles from "~/styles/Home.module.css";
 import { Campaign } from "~/types/campaign";
@@ -20,16 +24,17 @@ const Technology = "/assets/category/innovation.png";
 const Restoring = "/assets/category/restore.png";
 const Business = "/assets/category/investment.png";
 
-export async function loader() {
+export async function loader({ request }: LoaderFunctionArgs) {
   const API_URL = process.env.REACT_APP_API_URL;
 
   try {
     const res = await fetch(`${API_URL}/campaign/featured`);
+    if (!res.ok) {
+      throw json({ message: "Not found" }, { status: 404 });
+    }
     const campaigns: Campaign[] = await res.json();
-    if (res.ok) return campaigns;
-    return [];
+    return campaigns;
   } catch (e) {
-    console.error("Something wen't wrong");
     console.error(e);
     return [];
   }
@@ -59,7 +64,11 @@ export default function Index() {
             <p className={styles.alttext}>
               Launch a fundraiser to support the causes you care about.
             </p>
-            <Link type="button" to={"/auth"} prefetch="render">
+            <Link
+              type="button"
+              to={"/campaign/createcampaign"}
+              prefetch="render"
+            >
               Start a Campaign
             </Link>
           </div>
