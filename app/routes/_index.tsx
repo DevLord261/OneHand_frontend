@@ -14,12 +14,6 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const Links: LinksFunction = () => [
-  {
-    page: "/auth",
-  },
-];
-
 const Hero = "/assets/Hero.jpg";
 const Medical = "/assets/category/medic.png";
 const Technology = "/assets/category/innovation.png";

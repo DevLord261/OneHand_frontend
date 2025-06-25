@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ActionFunctionArgs } from "@remix-run/node";
-import { Form, redirect, useActionData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { Form, json, redirect, useActionData } from "@remix-run/react";
+
 import styles from "~/styles/Login.module.css";
 import clsx from "clsx";
 import { Link } from "@remix-run/react";
@@ -29,7 +29,8 @@ export async function action({ request }: ActionFunctionArgs) {
         body: formData,
       });
       if (res.ok) {
-        return redirect("/");
+        const email = !formData.get("email");
+        return redirect(`/auth/verify?email=${encodeURIComponent(email)}`);
       }
       console.log(res);
       return json({ error: "Failed to create user", status: 401 });
@@ -43,6 +44,7 @@ export async function action({ request }: ActionFunctionArgs) {
 export default function Login() {
   const [isActive, setIsActive] = useState(false);
   const actionData = useActionData<typeof action>();
+  const [isverify, setverify] = useState(false);
 
   return (
     <main className={styles.background}>
